@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "prisma": "2.30.3"
+  },
+  "scripts": {
+    "db:migrate": "npx prisma migrate dev --name init",
+    "db:visualize": "npx prisma studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "2.30.3"
+  }
+}
