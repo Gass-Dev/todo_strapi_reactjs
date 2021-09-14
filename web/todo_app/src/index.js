@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./Css/index.css";
-import Notes from "./App";
+import Todo from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Notes />
+    <Todo />
   </React.StrictMode>,
   document.getElementById("root")
 );

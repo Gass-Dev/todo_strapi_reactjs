@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
+
+  useEffect(() =>{
+    axios.get("https://strapi.naoroy.dev/todo").then((response) => {
+    console.log(response);
+  });
+  })
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
