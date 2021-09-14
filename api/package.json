@@ -1,0 +1,13 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db:migrate": "npx prisma migrate dev --name init",
+    "db:visualize": "npx prisma studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
