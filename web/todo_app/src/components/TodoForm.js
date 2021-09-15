@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 function TodoForm(props) {
-  const [input, setInput] = useState(props.edit ? props.edit.value : "");
+  const [content, setContent] = useState(props.edit ? props.edit.value : "");
+  const [title, setTitle] = useState(props.edit ? props.edit.value : "");
 
-  const inputRef = useRef(null);
+  const contentRef = useRef(null);
+  const titleRef = useRef(null);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  });
-
-  const handleChange = (e) => {
-    setInput(e.target.value);
+  const handleChange = () => {
+    setContent(contentRef.current.value);
+    setTitle(titleRef.current.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     props.onSubmit({
-      //id: Math.floor(Math.random() * 10000),
-      Content: input,
+      title: title,
+      content: content,
     });
 
-    setInput("");
+    setContent("");
+    setTitle("");
   };
 
   return (
@@ -31,11 +31,11 @@ function TodoForm(props) {
           <input
             type="text"
             placeholder="Mettre à jour ma tâche"
-            value={input}
+            value={content}
             name="text"
             className="todo-input-edit"
             onChange={handleChange}
-            ref={inputRef}
+            ref={contentRef}
           />
           <button className="todo-button-edit">Mettre à jour</button>
         </>
@@ -43,12 +43,22 @@ function TodoForm(props) {
         <>
           <input
             type="text"
+            placeholder="Titre"
+            value={title}
+            name="text"
+            className="todo-input-title"
+            onChange={handleChange}
+            ref={titleRef}
+          />
+
+          <input
+            type="text"
             placeholder="Ajouter une tâche"
-            value={input}
+            value={content}
             name="text"
             className="todo-input"
             onChange={handleChange}
-            ref={inputRef}
+            ref={contentRef}
           />
           <button className="todo-button">Ajouter</button>
         </>

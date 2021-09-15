@@ -25,7 +25,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
   return todos.map((todo, index) => (
     <div className={todo.isComplete ? "todo-complete" : "todo-row"} key={index}>
       <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        {todo.Content}
+        {todo.Content && todo.Title}
       </div>
       <div className="icon">
         <RiCloseCircleLine
@@ -33,7 +33,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
           className="delete-icon"
         />
         <TiEdit
-          onClick={() => setEdit({ id: todo.id, value: todo.Content })}
+          onClick={() => setEdit({ id: todo.id, value: todo.Content && todo.Title })}
           className="edit-icon"
         />
       </div>

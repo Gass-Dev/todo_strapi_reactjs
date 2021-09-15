@@ -12,7 +12,7 @@ function TodoList() {
       .then((todo) => { setTodos(todo) });
   })
 
-  const getTodos = (callback) => {
+  const getTodos = () => {
     return new Promise ((fulfill, reject) => {
       axios.get(api)
         .then((response) => { fulfill(response.data) })
@@ -21,14 +21,19 @@ function TodoList() {
   };
 
   const addTodo = (todo) => {
-    if (!todo.Content || /^\s*$/.test(todo.Content)) {
+    if (!todo.content || /^\s*$/.test(todo.content)) {
       return;
     }
-    //axios.post(api)
-
-    const newTodos = [todo, ...todos];
-
-    setTodos(newTodos);
+    return new Promise((fulfill, reject) => {
+      axios.post(api, {
+        Title: todo.title,
+        Content: todo.content
+      })
+        .then((response => {
+          getTodos()
+            .then((todo) => { setTodos(todo)})
+        }))
+    })
   };
 
   const updateTodo = (todoId, newValue) => {

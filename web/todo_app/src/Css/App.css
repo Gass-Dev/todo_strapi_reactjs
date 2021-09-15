@@ -58,6 +58,13 @@ h2{
   border-radius: 3px;
 }
 
+.todo-input-title{
+  margin-right: 20px;
+  padding: 5px 15px 5px 15px;
+  border-color: #f16c6c;
+  border-radius: 3px;
+}
+
 .todo-button-edit{
   margin-top: 10px;
   margin-left: 20px;
