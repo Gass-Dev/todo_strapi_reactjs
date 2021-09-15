@@ -3,19 +3,28 @@ import axios from "axios";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
+const api = "https://strapi.naoroy.dev/notes"
 function TodoList() {
-  const [todos, setTodos] = useState([]);
+  let [todos, setTodos] = useState([]);
 
-  useEffect(() =>{
-    axios.get("https://strapi.naoroy.dev/todo").then((response) => {
-    console.log(response);
-  });
+  useEffect((todos) => {
+    getTodos()
+      .then((todo) => { setTodos(todo) });
   })
 
+  const getTodos = (callback) => {
+    return new Promise ((fulfill, reject) => {
+      axios.get(api)
+        .then((response) => { fulfill(response.data) })
+        .catch((error) => reject(error));
+    })
+  };
+
   const addTodo = (todo) => {
-    if (!todo.text || /^\s*$/.test(todo.text)) {
+    if (!todo.Content || /^\s*$/.test(todo.Content)) {
       return;
     }
+    //axios.post(api)
 
     const newTodos = [todo, ...todos];
 
