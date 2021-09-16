@@ -3,53 +3,67 @@ import axios from "axios";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
-const api = "https://strapi.naoroy.dev/notes"
+const api = "https://strapi.naoroy.dev/notes/";
+
 function TodoList() {
   let [todos, setTodos] = useState([]);
 
   useEffect((todos) => {
-    getTodos()
-      .then((todo) => { setTodos(todo) });
-  })
+    getTodos().then((todos) => {
+      setTodos(todos);
+    });
+  });
 
   const getTodos = () => {
-    return new Promise ((fulfill, reject) => {
-      axios.get(api)
-        .then((response) => { fulfill(response.data) })
+    return new Promise((fulfill, reject) => {
+      axios
+        .get(api)
+        .then((response) => {
+          fulfill(response.data);
+        })
         .catch((error) => reject(error));
-    })
+    });
   };
 
   const addTodo = (todo) => {
-    if (!todo.content || /^\s*$/.test(todo.content)) {
+    if (!todo.content) {
       return;
     }
-    return new Promise((fulfill, reject) => {
-      axios.post(api, {
-        Title: todo.title,
-        Content: todo.content
-      })
-        .then((response => {
-          getTodos()
-            .then((todo) => { setTodos(todo)})
-        }))
-    })
+    return new Promise((setTodos) => { // fulfill, reject
+      axios
+        .post(api, {
+          Title: todo.title,
+          Content: todo.content,
+        })
+        .then(() => {
+          getTodos().then((todo) => {
+            setTodos(todo);
+          });
+        });
+    });
   };
 
   const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+    if (!newValue.text) {
       return;
     }
-
-    setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
-    );
+    return new Promise((prev) => {
+      axios.put().then(() => {
+        setTodos(prev);
+      });
+    });
+    // setTodos((prev) =>
+    //   prev.map((item) => (item.id === todoId ? newValue : item))
+    // );
   };
 
   const removeTodo = (id) => {
-    const removeArr = [...todos].filter((todo) => todo.id !== id);
-
-    setTodos(removeArr);
+    //const removeArr = [...todos].filter((todo) => todo.id !== id);
+    return new Promise((setTodos) => {
+      axios.delete(api + id).then(() => {
+        setTodos(id);
+      });
+    });
   };
 
   const completeTodo = (id) => {

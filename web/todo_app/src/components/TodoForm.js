@@ -30,6 +30,15 @@ function TodoForm(props) {
         <>
           <input
             type="text"
+            placeholder="Mettre à jour mon titre"
+            value={title}
+            name="text"
+            className="todo-input-edit-title"
+            onChange={handleChange}
+            ref={titleRef}
+          />
+          <input
+            type="text"
             placeholder="Mettre à jour ma tâche"
             value={content}
             name="text"
@@ -50,7 +59,6 @@ function TodoForm(props) {
             onChange={handleChange}
             ref={titleRef}
           />
-
           <input
             type="text"
             placeholder="Ajouter une tâche"

@@ -1,17 +1,17 @@
 {
     "git.ignoreLimitWarning": true,
     "restoreTerminals.terminals": [{
-        "splitTerminals": [{
-                "name": "Back-Strapi",
-                "commands": ["cd api", "cd /Users/gwen/Documents/todo_strapi_reactjs/api/todo_project", "npm run develop"]
-            },
-            {
-                "name": "api",
-                "commands": ["cd api"]
-            }
-        ]
-    },
-    {
+        // "splitTerminals": [{
+        //         "name": "Back-Strapi",
+        //         "commands": ["cd api", "cd /Users/gwen/Documents/todo_strapi_reactjs/api/todo_project", "npm run develop"]
+        //     },
+    //         {
+    //             "name": "api",
+    //             "commands": ["cd api"]
+    //         }
+    //     ]
+    // },
+    // {
         "splitTerminals": [{
                 "name": "Front-React",
                 "commands": ["cd web", "cd todo_app","yarn start"]
