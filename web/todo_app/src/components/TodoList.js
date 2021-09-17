@@ -57,15 +57,14 @@ function TodoList() {
         })
   };
 
-  const removeTodo = (id) => {
-    return new Promise((fulfill, reject) => {
+  const removeTodo = (id, todo) => {
       axios
         .delete(api + id)
-        .then((response) => {
-          fulfill(id);
+        .then(() => {
+          getTodos().then((todos) => {
+            setTodos(todos);
+          })
         })
-        .catch((error) => reject(error));
-    });
   };
 
   const completeTodo = (id) => {
