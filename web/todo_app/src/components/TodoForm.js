@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 
 function TodoForm(props) {
-  const [content, setContent] = useState(props.edit ? props.edit.value : "");
-  const [title, setTitle] = useState(props.edit ? props.edit.value : "");
+  const [content, setContent] = useState(props.edit ? props.edit.content : "");
+  const [title, setTitle] = useState(props.edit ? props.edit.title : "");
 
   const contentRef = useRef(null);
   const titleRef = useRef(null);

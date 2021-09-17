@@ -8,7 +8,7 @@ const api = "https://strapi.naoroy.dev/notes/";
 function TodoList() {
   let [todos, setTodos] = useState([]);
 
-  useEffect((todos) => {
+  useEffect(() => {
     getTodos().then((todos) => {
       setTodos(todos);
     });
@@ -26,43 +26,45 @@ function TodoList() {
   };
 
   const addTodo = (todo) => {
+    if (!todo.content || !todo.title) {
+      return;
+    }
+    axios
+      .post(api, {
+        Title: todo.title,
+        Content: todo.content,
+      })
+      .then(() => {
+        getTodos().then((todos) => {
+          setTodos(todos);
+        });
+      });
+  };
+
+  const updateTodo = (todoId, todo) => {
     if (!todo.content) {
       return;
     }
-    return new Promise((setTodos) => { // fulfill, reject
       axios
-        .post(api, {
+        .put(api + todoId, {
           Title: todo.title,
           Content: todo.content,
         })
         .then(() => {
-          getTodos().then((todo) => {
-            setTodos(todo);
-          });
-        });
-    });
-  };
-
-  const updateTodo = (todoId, newValue) => {
-    if (!newValue.text) {
-      return;
-    }
-    return new Promise((prev) => {
-      axios.put().then(() => {
-        setTodos(prev);
-      });
-    });
-    // setTodos((prev) =>
-    //   prev.map((item) => (item.id === todoId ? newValue : item))
-    // );
+          getTodos().then((todos) => {
+            setTodos(todos);
+          })
+        })
   };
 
   const removeTodo = (id) => {
-    //const removeArr = [...todos].filter((todo) => todo.id !== id);
-    return new Promise((setTodos) => {
-      axios.delete(api + id).then(() => {
-        setTodos(id);
-      });
+    return new Promise((fulfill, reject) => {
+      axios
+        .delete(api + id)
+        .then((response) => {
+          fulfill(id);
+        })
+        .catch((error) => reject(error));
     });
   };
 
